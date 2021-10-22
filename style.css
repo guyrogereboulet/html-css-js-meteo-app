@@ -16,9 +16,14 @@ body {
  height: 600px;
  background:  linear-gradient(45deg, #1068b6, #ec60a6);
  display: grid;
- /* Metto orrizontale 4 righe con le dimensioni scelte / ripeto la struttura in verticale per x volte */
+ /* Creo una griglia dove metto orrizontale 4 righe con le dimensioni scelte / ripeto la struttura in verticale per x volte */
  grid-template: 100px 300px 100px 100px / repeat(8,100px);
  margin: 100px auto 0;
  position: relative;
  border: 1px solid #f1f1f1;
+}
+
+h1 {
+    /* Inizio row / Inizio col / Fine row / Fine col */
+    grid-area: 1/1/2/-1;
 }
