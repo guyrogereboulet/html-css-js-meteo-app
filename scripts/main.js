@@ -1,4 +1,9 @@
 const CLEAPI = "b1242b3f54608645ce49a3bf6dfb3d68";
+let resultatApi;
+
+const temps = document.querySelector(".temps");
+const temperature = document.querySelector(".temperature");
+const localisation = document.querySelector(".localisation");
 
 //Ottengo la geolocalizzazione dal browser
 if (navigator.geolocation) {
@@ -30,5 +35,9 @@ function AppelAPI(long, lat) {
     })
     .then((data) => {
       console.log(data);
+      resultatApi = data;
+      temps.innerText = resultatApi.current.weather[0].description;
+      temperature.innerText = `${Math.trunc(resultatApi.current.temp)}°`;
+      localisation.innerText = resultatApi.timezone;
     });
 }
