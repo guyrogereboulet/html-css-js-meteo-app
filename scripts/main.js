@@ -4,6 +4,8 @@ let resultatApi;
 const temps = document.querySelector(".temps");
 const temperature = document.querySelector(".temperature");
 const localisation = document.querySelector(".localisation");
+const heure = document.querySelectorAll(".heure-nom-prevision");
+const tempPourH = document.querySelectorAll(".heure-prevision-valeur");
 
 //Ottengo la geolocalizzazione dal browser
 if (navigator.geolocation) {
@@ -36,8 +38,32 @@ function AppelAPI(long, lat) {
     .then((data) => {
       console.log(data);
       resultatApi = data;
+      //Con innerText inserisco del testo mentre con innerHtml inserisco del codice HTML
       temps.innerText = resultatApi.current.weather[0].description;
       temperature.innerText = `${Math.trunc(resultatApi.current.temp)}°`;
       localisation.innerText = resultatApi.timezone;
+
+      //Le ore ogni 3 ore
+      let heureActuelle = new Date().getHours();
+      console.log(heureActuelle);
+
+      for (let i = 0; i < heure.length; i++) {
+        let heureIncr = heureActuelle + i * 3;
+
+        if (heureIncr > 24) {
+          heure[i].innerText = `${heureIncr - 24} h`;
+        } else if (heureIncr === 24) {
+          heure[i].innerText = `00 h`;
+        } else {
+          heure[i].innerText = `${heureIncr} h`;
+        }
+      }
+
+      //Le temperature ogni 3 ore
+      for (let j = 0; j < tempPourH.length; j++) {
+        tempPourH[j].innerText = `${Math.trunc(
+          resultatApi.hourly[j * 3].temp
+        )}°`;
+      }
     });
 }
