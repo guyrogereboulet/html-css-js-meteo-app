@@ -12,6 +12,8 @@ const heure = document.querySelectorAll(".heure-nom-prevision");
 const tempPourH = document.querySelectorAll(".heure-prevision-valeur");
 const jourDiv = document.querySelectorAll(".jour-prevision-nom");
 const tempJoursDiv = document.querySelectorAll(".jour-prevision-temp");
+const imgIcone = document.querySelector(".logo-meteo");
+const chargementContainer = document.querySelector(".overlay-icone-chargement");
 
 //Ottengo la geolocalizzazione dal browser
 if (navigator.geolocation) {
@@ -83,5 +85,14 @@ function AppelAPI(long, lat) {
           resultatApi.daily[m + 1].temp.day
         )}°`;
       }
+
+      // Icone dinamiche
+      if (heureActuelle >= 6 && heureActuelle < 21) {
+        imgIcone.src = `ressources/jour/${resultatApi.current.weather[0].icon}.svg`;
+      } else {
+        imgIcone.src = `ressources/nuit/${resultatApi.current.weather[0].icon}.svg`;
+      }
+
+      chargementContainer.classList.add("disparition");
     });
 }
