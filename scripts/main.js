@@ -1,3 +1,7 @@
+import tabJoursEnOrdre from "./Utilitaire/gestionTemps.js";
+
+console.log(tabJoursEnOrdre);
+
 const CLEAPI = "b1242b3f54608645ce49a3bf6dfb3d68";
 let resultatApi;
 
