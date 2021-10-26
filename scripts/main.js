@@ -10,6 +10,8 @@ const temperature = document.querySelector(".temperature");
 const localisation = document.querySelector(".localisation");
 const heure = document.querySelectorAll(".heure-nom-prevision");
 const tempPourH = document.querySelectorAll(".heure-prevision-valeur");
+const jourDiv = document.querySelectorAll(".jour-prevision-nom");
+const tempJoursDiv = document.querySelectorAll(".jour-prevision-temp");
 
 //Ottengo la geolocalizzazione dal browser
 if (navigator.geolocation) {
@@ -67,6 +69,18 @@ function AppelAPI(long, lat) {
       for (let j = 0; j < tempPourH.length; j++) {
         tempPourH[j].innerText = `${Math.trunc(
           resultatApi.hourly[j * 3].temp
+        )}°`;
+      }
+
+      // Le prime tre lettere di giorni
+      for (let k = 0; k < tabJoursEnOrdre.length; k++) {
+        jourDiv[k].innerText = tabJoursEnOrdre[k].slice(0, 3);
+      }
+
+      // Temperatura al  giorno
+      for (let m = 0; m < 7; m++) {
+        tempJoursDiv[m].innerText = `${Math.trunc(
+          resultatApi.daily[m + 1].temp.day
         )}°`;
       }
     });
